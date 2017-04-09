@@ -1,0 +1,45 @@
+<div ng-controller='SendCtrl'>
+<div class="row">
+    <div class=" form col-md-10">
+        <form id="myForm" name="myForm" >
+
+
+            <div class="form-group">
+                <label>
+                    To：
+                </label>
+                <input type="text"  ng-model="rec" name="fname" />
+                <div ng-show="recnotnull()" class="alert alert-danger" role="alert">
+                    <span class="glyphicon glyphicon-exclamation-sign text-warning" aria-hidden="true"></span>
+                    <span class="sr-only">Error:</span>
+                    Enter a username
+                </div>
+
+            </div>
+
+            <div class="form-group">
+                <label>
+                    Title
+                </label>
+                <input type="text"  ng-model="ttl" name="fttl"/>
+
+                <!--<span class="glyphicon glyphicon-euro text-success"></span>-->
+                <!--<span id="titleError"></span>-->
+
+            </div>
+            <div class="form-group">
+                <label>
+                    Msg
+                </label>
+                <textarea  class="mail" ng-model="mail" name="fmail" > </textarea>
+                <!--<span id="emailError"></span>-->
+
+            </div>
+
+        </form>
+    </div>
+    <div class="col-md-3" id="sendBtn">
+        <input  type="button" value="Send a Message"  ng-click="SuccessSend()" >
+    </div>
+</div>
+</div>

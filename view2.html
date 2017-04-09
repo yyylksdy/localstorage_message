@@ -1,0 +1,26 @@
+<div ng-controller="View2Ctrll">
+<h1>Messages</h1>
+<div id="error"></div>
+<div class="row" >
+    <div class="col-md-12">
+        <table id="myTable" class= "table table-hover">
+            <tr>
+                <th>Title</th>
+                <th>Sender</th>
+                <th>Name</th>
+                <th>Operations</th>
+            </tr>
+            <tr ng-repeat="value in str_login">
+                <td>{{value.title}}</td>
+                <td>{{value.sender}}</td>
+                <td>{{value.name}}</td>
+                <td><button ng-click="view($index)" class="btn btn-primary btn-sm">View</button><button class="btn btn-info btn-sm" ng-click="delete($index)">Delete</button><div ng-init="rating = star.rating + 1"></div>
+                    <div class="make-star" make-star="star" index="$index" rating-value="rating" data-max="1" on-rating-selected="rateFunction(rating)"></div></td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="col-md-3"id="sendBtn"><input type="button" value="Send a Message" ng-click="sendMsg()" class="btn btn-success btn-block btn-md"></div>
+
+</div>
+</div>

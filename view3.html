@@ -1,0 +1,41 @@
+
+
+<div ng-controller="View3Ctrl">
+<div class="vid-container">
+    <video id="Video1" class="bgvid back" autoplay="false" muted="muted" preload="auto" loop>
+        <source src="http://shortcodelic1.manuelmasiacsasi.netdna-cdn.com/themes/geode/wp-content/uploads/2014/04/milky-way-river-1280hd.mp4.mp4" type="video/mp4">
+    </video>
+    <div class="inner-container">
+        <video id="Video2" class="bgvid inner" autoplay="false" muted="muted" preload="auto" loop>
+            <source src="http://shortcodelic1.manuelmasiacsasi.netdna-cdn.com/themes/geode/wp-content/uploads/2014/04/milky-way-river-1280hd.mp4.mp4" type="video/mp4">
+        </video>
+        <div  class="box">
+            <h1>Login</h1>
+            <input type="text" placeholder="Username" ng-model="username" />
+            <div ng-show="isNull(username)" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign text-warning" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Enter a username
+            </div>
+            <input type="text" placeholder="Password" ng-model="password"/>
+            <div ng-show="isNull(password)" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign text-warning" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                Enter a password
+            </div>
+            <button ng-click="login()" class="btn btn-primary btn-md">Login</button>
+            <div ng-show="isUnauth(username,password)" class="alert alert-danger" role="alert">
+                <span class="glyphicon glyphicon-exclamation-sign text-error" aria-hidden="true"></span>
+                <span class="sr-only">Error:</span>
+                wrong username/password
+            </div>
+
+            <p>Not a member? <span>Sign Up</span></p>
+
+        </div>
+    </div>
+</div>
+
+
+</div>
+

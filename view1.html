@@ -1,0 +1,30 @@
+<div ng-controller="profileCtrl">
+<a href="#" ng-click="Goback()">Go Back</a>
+
+<div class="row">
+    <div class="col-xs-3">
+        <img class="img-respontive img-circle" ng-show="login()" src="https://pbs.twimg.com/profile_images/474846790710079488/CcMYoRce.jpeg"  width="200" height="200">
+    </div>
+    <div class="col-md-12">
+        <table id="myTable" class=" table table-hover">
+            <tr>
+                <th>Name</th>
+                <th>Username</th>
+                <th>Password</th>
+                <th>E-mail</th>
+                <th>Location</th>
+                <th>Contact</th>
+            </tr>
+            <tr ng-model="str_login" >
+                <td class="active text-primary">{{str_login.name}}</td>
+                <td class="active">{{str_login.username}}</td>
+                <td class="active text-danger">{{str_login.password}}</td>
+                <td class="active">{{str_login.email}}</td>
+                <td class="active">{{str_login.location}}</td>
+                <td class="active">{{str_login.contact}}</td>
+            </tr>
+
+        </table>
+    </div>
+</div>
+</div>
