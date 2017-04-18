@@ -1,26 +1,61 @@
 <div ng-controller="View2Ctrll">
-<h1>Messages</h1>
+<h1>Product</h1>
 <div id="error"></div>
 <div class="row" >
     <div class="col-md-12">
-        <table id="myTable" class= "table table-hover">
-            <tr>
-                <th>Title</th>
-                <th>Sender</th>
-                <th>Name</th>
-                <th>Operations</th>
-            </tr>
-            <tr ng-repeat="value in str_login">
-                <td>{{value.title}}</td>
-                <td>{{value.sender}}</td>
-                <td>{{value.name}}</td>
-                <td><button ng-click="view($index)" class="btn btn-primary btn-sm">View</button><button class="btn btn-info btn-sm" ng-click="delete($index)">Delete</button><div ng-init="rating = star.rating + 1"></div>
-                    <div class="make-star" make-star="star" index="$index" rating-value="rating" data-max="1" on-rating-selected="rateFunction(rating)"></div></td>
-            </tr>
-        </table>
+
+
+        <form id="myForm" name="myForm" >
+        <!--<select ng-model="selectedName" ng-options="x for x in size" value="Size">-->
+        <!--</select>-->
+
+            <div>
+                <img class="img-respontive img-circle"  ng-src="{{itemPic}}" >
+            </div>
+            <div>
+                <label>
+                Product size:
+                </label>
+                <select id="op"  ng-model="selectedSize" ng-change="selectedSizeChanged()" required>
+                    <option disabled style="display: none"></option>
+                    <option ng-repeat="productSize in size">{{productSize}}</option>
+                </select>
+
+            </div>
+
+            <div>
+                <label>
+                Color:
+                </label>
+                <select  ng-model="selectedColor" ng-change="selectedColorChanged()" required>
+                    <option disabled style="display: none"></option>
+                    <option ng-repeat="productColor in color">{{productColor}}</option>
+                </select>
+            </div>
+            <div>
+                <label>Original Price:
+                </label> {{orgprice}}
+            </div>
+            <div>
+               <label>Sales:
+               </label> {{price}}
+            </div>
+
+            <div>
+
+                    <label>
+                        Quantity:
+                    </label>
+                    <input type="text"  ng-model="quantity" name="fquantity" required />
+            </div>
+
+
+        </form>
     </div>
 
-    <div class="col-md-3"id="sendBtn"><input type="button" value="Send a Message" ng-click="sendMsg()" class="btn btn-success btn-block btn-md"></div>
+    <div class="col-md-3"id="sendBtn"><input type="button" value="Next" ng-click="sendMsg()" class="btn btn-success btn-block btn-md"></div>
+
 
 </div>
+
 </div>

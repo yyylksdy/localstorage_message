@@ -1,6 +1,7 @@
 /**
  * Created by YoYo on 2/28/17.
  */
+
 angular.module('myApp', ['ngRoute'])
 .config(['$routeProvider','$locationProvider',function($routeProvider,$locationProvider){// routeProvider is service
     $locationProvider.hashPrefix('!');
@@ -112,6 +113,57 @@ angular.module('myApp', ['ngRoute'])
         }
 
     })
+    .factory('myService3', function() {
+        var savedData = {}
+        function set(data) {
+            savedData = data;
+        }
+        function get() {
+            return savedData;
+        }
+
+        return {
+            set: set,
+            get: get
+        }
+
+    })
+    .factory('myService4', function() {
+        var savedData = {}
+        function set(data) {
+            savedData = data;
+        }
+        function get() {
+            return savedData;
+        }
+
+        return {
+            set: set,
+            get: get
+        }
+
+    })
+    .factory('myService5', function() {
+        var savedData = {}
+        function set(data) {
+            savedData = data;
+        }
+        function get() {
+            return savedData;
+        }
+
+        return {
+            set: set,
+            get: get
+        }
+
+    })
+    // .factory('selectedItem', function () {
+    //     return {
+    //         price: '',
+    //         color: ''
+    //     }
+    // })
 
             .controller('homeCtrl', ['$scope','$location','cacheService','$route',function($scope,$location,cacheService,$route) {
         $scope.Unlogged=function () {
@@ -144,65 +196,160 @@ angular.module('myApp', ['ngRoute'])
         }
     //    $location.path('/view1');
     }])
-.controller('View2Ctrll', ['$scope','cacheService','$location','myService','myService2',function($scope,cacheService,$location,myService,myService2) {
+.controller('View2Ctrll', ['$scope','cacheService','$location','myService','myService2','myService3','myService4','myService5',function($scope,cacheService,$location,myService,myService2,myService3,myService4,myService5) {
 
-    var msg = [
-        { name:"John",sender: 1, title: 'Sayhi',username:2,star:'false',descryption:"Dear Anna Hope this letter finds you in the best of your health. I just wanted to write this letter to tell you that how much I think about you. You are always in my mind & thoughts.Although, there is so much distance between you and me, you are still my best friend. I still miss the moments we spent together and the secrets we shared with each other."},
-        { name:"Anna",sender: 2, title: 'Thankyou letter',username:1,star:'false',descryption:"Dear FirstName,It was a pleasure to meet with you yesterday during my interview for Manager of the Marketing Department. I appreciated your well thought out questions, and hope that I was able to address them all thoroughly. I enjoyed the candor and humor that you showed during the interview, and I believe that my management style would work well in your group.I also appreciated you taking the time to share information on the Marketing team and the projects and events you are working on.You were very informative, and I am grateful for the insight you provided.Thank you very much for taking the time and consideration to meet with me. If you have any additional questions, please don't hesitate to contact me directly.Sincerely,FirstName LastNameEmailPhone"},
-        { name:"Anna",sender: 2, title: 'Received letter',username:1,star:'true',descryption:"Dear (name),I am writing to let you know how very pleased I am with the education my son/daughter, (child's name) is receiving at (name of school).(Child's name) has had great success with (briefly say what is going right). In particular, (name the professionals working with your child and how they have made a difference).I look forward to (child's name) continuing progress. Thank you for all your efforts, and those of your staff.Sincerely,Your name"}
+   // document.getElementById('op').selectedIndex = '0';
+    $scope.size = ["S", "M", "L"];
+     $scope.color = ["Blue", "Black", "Silver", "Brown","Camel"];
+    //
+
+
+    // $scope.productlist = {};
+    // $scope.productlist.productId = "1";
+
+    $scope.products = [{
+        id: "1",
+        size: "S",
+        color:"Blue",
+        orgprice:"799",
+        price:"$500",
+        itemPic:"https://img.stylebop.com/look/500x750/df/82464_f.jpg"
+    }, {
+        id: "2",
+        size: "M",
+        color:"Black",
+        orgprice:"790",
+        price:"$600",
+        itemPic:"https://img.stylebop.com/look/500x750/ca/71808_f.jpg"
+    },
+        {
+        id: "3",
+            size: "L",
+            color:"Silver",
+            orgprice:"888",
+            price:"$700",
+            itemPic:"https://img.stylebop.com/look/500x750/f3/84489_f.jpg"
+    }, {
+        id: "4",
+            size: "S",
+            color:"Camel",
+            orgprice:"1109",
+            price:"$800",
+            itemPic:"https://img.stylebop.com/look/500x750/18/72035_f.jpg"
+    },
+        {
+            id: "5",
+            size: "M",
+            color:"Camel",
+            orgprice:"1199",
+            price:"$900",
+            itemPic:"https://img.stylebop.com/look/500x750/df/82464_f.jpg"
+        },
+        {
+            id: "6",
+            size: "L",
+            color:"Black",
+            orgprice:"1599",
+            price:"$1000",
+            itemPic:"https://img.stylebop.com/look/500x750/ca/71808_f.jpg"
+        }
     ];
-    //  var str_all,str_login=[];
-    var str_login=[];
-    if(localStorage.getItem("Messages")==null) {
-        cacheService.setData('Messages', msg);
-    }
-    var str_msg =JSON.parse(localStorage.getItem("Messages"));
-    var str_all=JSON.parse(localStorage.getItem("city"));
-    // console.log(str_all.username);
-    var token=localStorage.getItem("token");
-    if(token){
-        for(var j=0;j<str_msg.length;j++){
-            if(str_msg[j].username===str_all.username){
-                //   console.log(str_msg);
-                str_login.push(str_msg[j]);
+    $scope.itemPic="https://img.stylebop.com/look/500x750/ca/71808_f.jpg";
+    $scope.price="$1000";
+    $scope.orgprice="$1599";
+    //$scope.products.size="S";
+ //   document.getElementById('op').selectedIndex = '2';
+$scope.isNull=0;
+
+    $scope.selectedSizeChanged=function(){
+       $scope. isNull++;
+        myService2.set($scope.selectedSize);
+        $scope.products.forEach(function(item){
+            if($scope.selectedSize===item.size){
+                $scope.price=item.price;
+                $scope.orgprice=item.orgprice;
+                myService3.set($scope.price);
+                myService4.set($scope.orgprice);
+                $scope.itemPic=item.itemPic;
 
             }
-        }
-        cacheService.setData('Messages',str_login);
-        myService.set(str_login);
-        $scope.str_login=JSON.parse(localStorage.getItem("Messages"));
-        //  console.log($scope.str_login);
-
-    }
-    // console.log(str_all);
-
-    $scope.view=function (index) {
-
-        $location.path('/view2/newview');
-        myService2.set(index);
-    }
-    $scope.delete=function(index) {
-
-        $scope.str_login.splice(index,1);
-        console.log($scope.str_login);
-        cacheService.setData('Messages',$scope.str_login);
-
-    }
-    $scope.sendMsg=function(){
-        $location.path('/view2/sendview');
-        //  alert("successfully send!");
-    }
-
-    $scope.rating = 5;
-    $scope.rateFunction = function(rating) {
-        alert('Rating selected - ' + rating);
+        })
 
     };
+
+    $scope.selectedColorChanged=function(){
+       $scope. isNull++;
+       console.log($scope.selectedColor);
+        myService.set($scope.selectedColor);
+        $scope.products.forEach(function(item){
+            if($scope.selectedColor===item.color){
+                $scope.price=item.price;
+                $scope.orgprice=item.orgprice;
+                myService3.set($scope.price);
+                myService4.set($scope.orgprice);
+                $scope.itemPic=item.itemPic;
+
+            }
+        });
+
+        if($scope.isNull===2){
+            console.log("color and size selected");
+
+        }
+
+    };
+
+    $scope.sendMsg=function(){
+        $scope.isNull++;
+        //  $location.path('/view2/sendview');
+        //  alert("successfully send!");
+      // console.log();
+        console.log(parseInt($scope.quantity))
+        if($scope.isNull>=3 && parseInt($scope.quantity).toString()!= 'NaN' ){
+            myService5.set($scope.quantity);
+         //   console.log("complete");
+            $location.path('/view2/sendview');
+        }
+        else{
+            alert("Please select all the artributes and quantity should be a number !");
+        }
+    }
+
+
+
+
+
+
+
+
+
+
     //    $location.path('/view1');
 }])
+    .controller('SendCtrl',['$scope','cacheService','$location','$rootScope','myService','myService2','myService3','myService4','myService5',function ($scope,cacheService,$location,$rootScope,myService,myService2,myService3,myService4,myService5) {
+        //
+
+
+
+        $scope.SuccessSend=function () {
+
+      //      $scope.str_login.push($scope.addr1);
+            // console.log($scope.addr1);
+            $scope.shippingaddress = ($scope.addr1 ? $scope.addr1+" " : "")+($scope.addr2 ? $scope.addr2+" " : "")+($scope.city ? $scope.city+" " : "")+($scope.state ? $scope.state+" " : "")+($scope.zip ? $scope.zip : "");
+            console.log(myService.get());
+            $scope.color=myService.get();
+            $scope.size=myService2.get();
+            $scope.price=myService3.get();
+            $scope.orgprice=myService4.get();
+            $scope.quantity=myService5.get();
+
+
+
+        }
+    }])
 .controller('View3Ctrl', ['cacheService','$scope','$location','$rootScope','myService',function(cacheService,$scope,$location,$rootScope,myService) {
     var city = [
-        { name:"John",username: 1, password: '111' ,email:'john@gmail.com',location:'2020 f street',contact:'2022888592',loginok:'false'},
+        { name:"John",username: 1, password: '111' ,email:'john@gmail.com',location:'2020 f street',contact:'2022142512',loginok:'false'},
         { name:"Anna",username: 2, password: '111' ,email:'anna@gmail.com',location:'2020 i street',contact:'2022882141',loginok:'false'}
     ];
 
@@ -322,57 +469,16 @@ angular.module('myApp', ['ngRoute'])
     .controller('DetailsCtrl',['$scope','cacheService','$location','myService','myService2',function($scope,cacheService,$location,myService,myService2) {
         // console.log("aaa");
         //  $scope.mmm="aaa";
-        var str_details= myService.get();
-        var index=myService2.get();
-        // console.log(str_details[index].title);
-        $scope.title=str_details[index].title;
-        $scope.name=str_details[index].name;
-        $scope.descryption=str_details[index].descryption;
+        // var str_details= myService.get();
+        // var index=myService2.get();
+        // // console.log(str_details[index].title);
+        // $scope.title=str_details[index].title;
+        // $scope.name=str_details[index].name;
+        // $scope.descryption=str_details[index].descryption;
+
 
     }])
-    .controller('SendCtrl',['$scope','cacheService','$location','$rootScope',function ($scope,cacheService,$location,$rootScope) {
-        //
 
-        var str_msg =JSON.parse(localStorage.getItem("Messages"));
-        var str_all=JSON.parse(localStorage.getItem("city"));
-        // console.log(str_all.username);
-        var token=localStorage.getItem("token");
-
-        $scope.SuccessSend=function () {
-            // alert($scope.mail);
-            var str_login=[];var flag=0;
-            if(token){
-                // alert("fff");
-                var sendmsg={name:str_all.name,sender: str_all.username, title:$scope.ttl,username:$scope.rec,star:'false',descryption:$scope.mail};
-                // console.log(sendmsg);
-                str_msg.push(sendmsg);
-                console.log(str_msg);
-                var receivemsg={name:str_all.name,sender: str_all.username, title:$scope.ttl,username:str_all.username,star:'false',descryption:$scope.mail};
-                str_msg.push(receivemsg);
-                for(var j=0;j<str_msg.length;j++){
-                    if(str_msg[j].username===str_all.username){
-                        //   console.log(str_msg);
-                        str_login.push(str_msg[j]);
-                        flag=1;
-
-                    }
-                }
-                cacheService.setData('Messages',str_login);
-                var history = [];
-
-
-                if(flag==1){
-                    //  $route.reload();
-                    $location.path('/view2');
-                    alert("Successfully send Message");
-                }
-                else{
-                    alert("error, no this username");
-                }
-            }
-
-        }
-    }])
     .directive('makeStar',
         function() {
 
